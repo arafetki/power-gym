@@ -1,1 +1,1 @@
-# Gym Management SaaS Application
+# Gym Management Application
