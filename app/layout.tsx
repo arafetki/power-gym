@@ -1,20 +1,31 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import type { Metadata, Viewport } from "next";
+import { AuthKitProvider } from '@workos-inc/authkit-nextjs';
+import { ThemeProvider } from 'next-themes';
+import {Rubik, Rubik_Mono_One} from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const rubikSans = Rubik({
+  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-rubik-sans",
+  weight: ['300', '400', '500','600','700','800','900'],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const rubikMono = Rubik_Mono_One({
+  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-rubik-mono",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
   title: "Modern Gym Management Application"};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+}
 
 export default function RootLayout({
   children,
@@ -22,11 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${rubikSans.variable} ${rubikMono.variable} font-rubikSans antialiased`}
       >
-        {children}
+        <AuthKitProvider>
+          <ThemeProvider 
+            enableSystem 
+            defaultTheme="system" 
+            attribute="class" 
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </AuthKitProvider>
       </body>
     </html>
   );
