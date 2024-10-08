@@ -1,22 +1,14 @@
-import { withAuth, signOut } from '@workos-inc/authkit-nextjs';
-import { Button } from '@/components/ui/button';
+import { auth } from "@/lib/auth";
+
 
 export default async function Dashboard() {
 
-    const {user} = await withAuth({ ensureSignedIn: true })
+    const session = await auth()
 
     return (
-        <div>
+        <div className="space-y-4">
             <h1>Dashboard</h1>
-            <p>Hello, {user.firstName}</p>
-            <form 
-                action={async ()=>{
-                    "use server";
-                    await signOut();
-                }}
-            >
-                <Button type='submit'>Sign Out</Button>
-            </form>
+            <p>Hello, {session?.user?.name}</p>
         </div>
     );
 }

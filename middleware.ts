@@ -1,10 +1,26 @@
-import { authkitMiddleware } from '@workos-inc/authkit-nextjs';
+import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server"
 
-export default authkitMiddleware({
-    middlewareAuth: {
-        enabled: true,
-        unauthenticatedPaths: ['/','/login','/register'],
+export default auth(async (req)=>{
+
+    const isAuthPage =
+        req.nextUrl.pathname.startsWith("/login") ||
+        req.nextUrl.pathname.startsWith("/register")
+    if (isAuthPage) {
+        if (req.auth) {
+            return NextResponse.redirect(new URL("/dashboard", req.url))
+        }
+        return
     }
-});
 
-export const config = { matcher: ['/','/login','/register','/dashboard/:path*'] };
+    if (!req.auth && req.nextUrl.pathname !== "/login") {
+        const newUrl = new URL(`/login?from=${req.nextUrl.pathname}`, req.nextUrl.origin)
+        return Response.redirect(newUrl)
+    }
+
+},
+)
+
+export const config = {
+  matcher: ["/dashboard/:path*","/login","/register"],
+}

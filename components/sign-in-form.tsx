@@ -1,7 +1,9 @@
 "use client";
 
+import { useCallback } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userAuthSchema } from "@/lib/zod";
 import { Icons } from "@/components/icons";
@@ -17,19 +19,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Link from "next/link";
-import { createMagicAuthAction } from "@/server/actions";
-import { safeAsync } from "@/lib/utils";
-
 import type { SignInFormData } from "@/types";
+import { signIn } from "next-auth/react";
 
-
-type SignInFormProps = {
-    googleAuthUrl: string
-    microsoftAuthUrl: string
-}
-
-export function SignInForm({googleAuthUrl,microsoftAuthUrl}: SignInFormProps) {
+export function SignInForm() {
 
     const form = useForm<SignInFormData>({
         resolver: zodResolver(userAuthSchema),
@@ -39,36 +32,33 @@ export function SignInForm({googleAuthUrl,microsoftAuthUrl}: SignInFormProps) {
         }
     })
 
-    const router = useRouter()
+    const searchParams = useSearchParams()
+    const from = searchParams.get("from")
+
+    const SignInWithGoogle = useCallback(async () => {
+        await signIn("google",{
+            redirect: false,
+            redirectTo: from || "/dashboard"
+        })
+    },[from])
 
     const onValidSubmit: SubmitHandler<SignInFormData> = async (formData) => {
-        const [error,magicAuth] = await safeAsync(createMagicAuthAction(formData))
-        if (error) {
-            console.error(error)
-            return form.setError("root",{
-                message: "oops"
-            })
-        }
-        console.log(magicAuth)
-        router.push(`/magic-code?email=${formData.email}`)
+        await signIn("resend", {
+            ...formData,
+            redirect: false,
+            callbackUrl: from || "/dashboard",
+        })
     }
 
     return (
         <Form {...form}>
-            <div className="flex w-full flex-col gap-2">
-                <Button
-                    variant="outline"
-                    asChild
-                >
-                    <Link href={googleAuthUrl}><Icons.google className="size-6 mr-2"/> Continue with Google</Link>
-                </Button>
-                <Button
-                    variant="outline"
-                    asChild
-                >
-                    <Link href={microsoftAuthUrl}><Icons.microsoft className="size-6 mr-2"/> Continue with Microsoft</Link>
-                </Button>
-            </div>
+            <Button
+                variant="outline"
+                onClick={SignInWithGoogle}
+                className="w-full font-normal"
+            >
+                <Icons.google className="size-5 mr-2"/> Continue with Google
+            </Button>
             <div className="flex w-full items-center gap-4 py-2">
                 <Separator className="flex-1" />
                 <p className="shrink-0 text-xs text-muted-foreground">OR</p>
@@ -112,7 +102,7 @@ export function SignInForm({googleAuthUrl,microsoftAuthUrl}: SignInFormProps) {
                             </FormControl>
                             <div className="space-y-1 leading-none">
                                 <FormLabel className="text-sm font-normal">
-                                    Remember for 15 days.
+                                    Remember me
                                 </FormLabel>
                             </div>
                         </FormItem>

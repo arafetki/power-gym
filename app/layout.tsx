@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { AuthKitProvider } from '@workos-inc/authkit-nextjs';
 import { ThemeProvider } from 'next-themes';
+import { SessionProvider } from 'next-auth/react';
 import {Rubik, Rubik_Mono_One} from "next/font/google";
 import "./globals.css";
 
@@ -18,7 +18,12 @@ const rubikMono = Rubik_Mono_One({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Gym Management Application"};
+  title: {
+    default: "Power Gym",
+    template: `%s | Power Gym`,
+  },
+  
+};
 
 export const viewport: Viewport = {
   themeColor: [
@@ -37,16 +42,17 @@ export default function RootLayout({
       <body
         className={`${rubikSans.variable} ${rubikMono.variable} font-rubikSans antialiased`}
       >
-        <AuthKitProvider>
-          <ThemeProvider 
-            enableSystem 
-            defaultTheme="system" 
-            attribute="class" 
+        <SessionProvider>
+          <ThemeProvider
+            enableSystem
+            defaultTheme="system"
+            attribute="class"
             disableTransitionOnChange
           >
             {children}
           </ThemeProvider>
-        </AuthKitProvider>
+        </SessionProvider>
+
       </body>
     </html>
   );
