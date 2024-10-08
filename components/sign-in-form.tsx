@@ -6,11 +6,11 @@ import { useSearchParams } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userAuthSchema } from "@/lib/zod";
+import { signIn } from "next-auth/react";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import type { SignInFormData } from "@/types";
-import { signIn } from "next-auth/react";
+
 
 export function SignInForm() {
 
@@ -28,7 +28,6 @@ export function SignInForm() {
         resolver: zodResolver(userAuthSchema),
         defaultValues: {
             email: "",
-            remember: false,
         }
     })
 
@@ -63,7 +62,7 @@ export function SignInForm() {
                 <Separator className="flex-1" />
                 <p className="shrink-0 text-xs text-muted-foreground">OR</p>
                 <Separator className="flex-1" />
-            </div>            
+            </div>
             <form onSubmit={form.handleSubmit(onValidSubmit)} className="flex w-full flex-col gap-4">
                 <FormField
                     control={form.control}
@@ -88,30 +87,10 @@ export function SignInForm() {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="remember"
-                    render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 shadow">
-                            <FormControl>
-                                <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                    className="rounded-md"
-                                />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                                <FormLabel className="text-sm font-normal">
-                                    Remember me
-                                </FormLabel>
-                            </div>
-                        </FormItem>
-                    )}
-                />
-                <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="rounded-lg" 
+                <Button
+                    type="submit"
+                    size="lg"
+                    className="rounded-lg"
                     disabled={form.formState.isSubmitting}
                 >
                     <Icons.mail className="size-5 mr-2"/> Continue with Email
