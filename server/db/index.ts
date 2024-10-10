@@ -9,7 +9,7 @@ const globalForDb = globalThis as unknown as {
 };
 
 export const client =
-  globalForDb.client ?? postgres(env.AUTH_DRIZZLE_URL,{max: 1});
+  globalForDb.client ?? postgres(env.SUPABASE_DB_URL);
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
 export const db = drizzle(client,{schema});

@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from 'next-auth/react';
 import {Rubik, Rubik_Mono_One} from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
+
+
 import "./globals.css";
 
 const rubikSans = Rubik({
@@ -42,17 +44,15 @@ export default function RootLayout({
       <body
         className={`${rubikSans.variable} ${rubikMono.variable} font-rubikSans antialiased`}
       >
-        <SessionProvider>
-          <ThemeProvider
-            enableSystem
-            defaultTheme="system"
-            attribute="class"
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </SessionProvider>
-
+        <ThemeProvider
+          enableSystem
+          defaultTheme="system"
+          attribute="class"
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster richColors closeButton />
+        </ThemeProvider>
       </body>
     </html>
   );
