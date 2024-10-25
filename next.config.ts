@@ -1,6 +1,7 @@
-await import('./env.mjs');
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next';
+import "@/env";
+ 
+const nextConfig: NextConfig = {
     images: {
         remotePatterns: [
             {
@@ -11,5 +12,5 @@ const nextConfig = {
         ]
     },
 };
-
+ 
 export default nextConfig;

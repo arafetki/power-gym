@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { loginWithOtp, loginWithGoogleOAuth } from "@/server/actions";
 import { safeAsync } from "@/lib/utils";
 import { Turnstile } from '@marsidev/react-turnstile'
-import { env } from "@/env.mjs";
+import { env } from "@/env.js";
 import {
   Form,
   FormControl,
