@@ -12,7 +12,6 @@ export const env = createEnv({
       .default("development"),
   },
   client: {
-    NEXT_PUBLIC_SITE_URL: z.string().url(),
     NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: z.string().min(1),
     NEXT_PUBLIC_STACK_PROJECT_ID: z.string().min(1),
     NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: z.string().min(1),
@@ -21,7 +20,6 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY,
     NEXT_PUBLIC_STACK_PROJECT_ID: process.env.NEXT_PUBLIC_STACK_PROJECT_ID,
     NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY,

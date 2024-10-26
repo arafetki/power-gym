@@ -26,9 +26,6 @@ export const users = pgTable("users", {
   };
 });
 
-export const usersRelations = relations(users,({one})=>({
-  profile: one(profiles)
-}))
 
 export const genderEnum = pgEnum("gender", ["male", "female"]);
 

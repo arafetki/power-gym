@@ -1,7 +1,6 @@
 import "server-only";
 
 import { StackServerApp } from "@stackframe/stack";
-import { env } from "@/env.mjs";
 
 export const stackServerApp = new StackServerApp({
   tokenStore: "nextjs-cookie", // storing auth tokens in cookies
@@ -11,6 +10,6 @@ export const stackServerApp = new StackServerApp({
     afterSignIn: "/dashboard",
     signUp: "/auth/register",
     afterSignOut: "/",
-    handler: `${env.NEXT_PUBLIC_SITE_URL}/auth`
+    handler: `${process.env.NEXT_PUBLIC_SITE_URL}/auth`
   }
 });
