@@ -89,7 +89,7 @@ export default function SignIn() {
             </form>
             <p className="text-center text-sm">
                 Need to create an account?&nbsp;
-                <Link href="/register" className="text-cyan-500 hover:underline">
+                <Link href="/auth/register" className="text-cyan-500 hover:underline">
                     Sign Up
                 </Link>
             </p>
