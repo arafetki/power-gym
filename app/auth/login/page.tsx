@@ -1,17 +1,17 @@
+import SignIn from "@/components/sign-in-form";
 import Link from "next/link";
 import { Metadata } from "next";
-import { SignInForm } from "@/components/sign-in-form";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
+
 
 export const metadata: Metadata = {
     title: "Login"
 }
 
 export default async function Login() {
-
 
     return (
         <div className="relative flex h-screen w-screen">
@@ -31,7 +31,7 @@ export default async function Login() {
                         <p className="pb-2 text-xl font-medium">Welcome Back</p>
                         <p className="text-base text-muted-foreground">Log in to your account to continue</p>
                     </div>
-                    <SignInForm/>
+                    <SignIn/>
                 </div>
             </div>
             {/* Right side */}

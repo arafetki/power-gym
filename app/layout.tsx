@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from 'next-themes';
 import {Rubik, Rubik_Mono_One} from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackServerApp } from "@/lib/auth";
 
 import "./globals.css";
 
@@ -50,7 +51,11 @@ export default function RootLayout({
           attribute="class"
           disableTransitionOnChange
         >
-          {children}
+          <StackProvider app={stackServerApp}>
+            <StackTheme>
+              {children}
+            </StackTheme>
+          </StackProvider>
           <Toaster richColors closeButton />
         </ThemeProvider>
       </body>

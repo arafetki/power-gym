@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { userAuthSchema, CreatePaymentIntentRequestSchema } from "@/lib/zod";
+import { userAuthSchema } from "@/lib/zod";
 
 export type SignInFormData = z.infer<typeof userAuthSchema>;
 
@@ -19,6 +19,4 @@ export type APIRequest<T = Record<string, unknown>> = {
     data: T;
 };
 
-export type CreatePaymentIntentAPIRequest = APIRequest<z.infer<typeof CreatePaymentIntentRequestSchema>>;
-
-
+export type SearchParams = Record<string,string | string[] | undefined>
