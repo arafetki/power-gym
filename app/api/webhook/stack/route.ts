@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
         "svix-signature": req.headers.get("svix-signature") || ""
     }
 
-    const body = await req.text();
+    const buffer = await req.arrayBuffer()
+    const body = Buffer.from(buffer); 
 
     let payload;
 
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
                     avatarURL: parsedPayload.data.profile_image_url,
                     createdAt: new Date(parsedPayload.data.signed_up_at_millis)
                 }
-                await db.insert(users).values(newUser).onConflictDoUpdate({target: users.id, set: newUser})
+                await db.insert(users).values(newUser).onConflictDoNothing({target: users.email})
                 break
             case "user.updated":
                 const updatedUser: UpdateUserParams = {
@@ -55,9 +56,9 @@ export async function POST(req: NextRequest) {
     } catch (err) {
         console.error(err)
         if (err instanceof DrizzleError) {
-            return NextResponse.json<APIResponse>({"error": {"message": "the server encountered a problem and could not process the request"}},{status: 500})
+            return NextResponse.json<APIResponse>({"error": {"message": "The server encountered a problem and could not process the request"}},{status: 500})
         }
-        return NextResponse.json<APIResponse>({"error": {"message": "the server encountered a problem and could not process the request"}},{status: 400})
+        return NextResponse.json<APIResponse>({"error": {"message": "The request could not be processed due to invalid or expired input"}},{status: 400})
     }
 
     return new Response(null, {status: 204})
