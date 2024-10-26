@@ -6,6 +6,7 @@ export const env = createEnv({
     DATABASE_URL:z.string().url(),
     UPLOADTHING_TOKEN: z.string().min(1),
     STACK_SECRET_SERVER_KEY: z.string().min(1),
+    STACK_WEBHOOK_SECRET: z.string().min(1),
     NODE_ENV: z
       .enum(["development", "staging", "production"])
       .default("development"),
@@ -25,6 +26,7 @@ export const env = createEnv({
     NEXT_PUBLIC_STACK_PROJECT_ID: process.env.NEXT_PUBLIC_STACK_PROJECT_ID,
     NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY,
     STACK_SECRET_SERVER_KEY: process.env.STACK_SECRET_SERVER_KEY,
+    STACK_WEBHOOK_SECRET: process.env.STACK_WEBHOOK_SECRET,
 
   },
   emptyStringAsUndefined: true,

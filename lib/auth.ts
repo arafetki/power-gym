@@ -9,6 +9,7 @@ export const stackServerApp = new StackServerApp({
     home: "/",
     signIn: "/auth/login",
     afterSignIn: "/dashboard",
+    signUp: "/auth/register",
     afterSignOut: "/",
     handler: `${env.NEXT_PUBLIC_SITE_URL}/auth`
   }

@@ -11,8 +11,6 @@ type HandlerProps = {
 
 export default function Hanlder({params,searchParams}: HandlerProps) {
 
-
-
   return (
     <StackHandler
       app={stackServerApp}

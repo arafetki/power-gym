@@ -1,7 +1,9 @@
 import {z} from "zod";
-import { userAuthSchema } from "@/lib/zod";
+import { UserAuthSchema } from "@/lib/zod";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { users } from "@/server/db/schema";
 
-export type SignInFormData = z.infer<typeof userAuthSchema>;
+export type SignInFormData = z.infer<typeof UserAuthSchema>;
 
 type APIErrorResponse = {
     error : {

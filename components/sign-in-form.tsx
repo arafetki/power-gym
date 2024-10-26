@@ -5,7 +5,7 @@ import OAuthButton from '@/components/oauth-button';
 import { useStackApp } from "@stackframe/stack";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userAuthSchema } from "@/lib/zod";
+import { UserAuthSchema } from "@/lib/zod";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Input } from '@/components/ui/input';
@@ -26,7 +26,7 @@ export default function SignIn() {
     const app = useStackApp()
 
     const form = useForm<SignInFormData>({
-        resolver: zodResolver(userAuthSchema),
+        resolver: zodResolver(UserAuthSchema),
         defaultValues: {
             email: "",
         }

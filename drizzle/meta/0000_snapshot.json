@@ -1,5 +1,5 @@
 {
-  "id": "b5a14158-df26-4941-810c-1c1ec6a1655f",
+  "id": "44ac3a49-8e3c-4759-836a-49ff5c3066da",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -170,12 +170,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
-        },
-        "last_login": {
-          "name": "last_login",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true
         },
         "created_at": {
           "name": "created_at",

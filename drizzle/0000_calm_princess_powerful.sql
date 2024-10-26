@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"display_name" varchar(256) NOT NULL,
 	"email" varchar(256) NOT NULL,
 	"avatar_url" text,
-	"last_login" timestamp with time zone NOT NULL,
 	"created_at" timestamp with time zone NOT NULL,
 	"updated_at" timestamp with time zone,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
