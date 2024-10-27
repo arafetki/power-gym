@@ -5,6 +5,7 @@ export const env = createEnv({
   server: {
     DATABASE_URL:z.string().url(),
     UPLOADTHING_TOKEN: z.string().min(1),
+    UPLOADTHING_APP_ID: z.string().min(1),
     STACK_SECRET_SERVER_KEY: z.string().min(1),
     STACK_WEBHOOK_SECRET: z.string().min(1),
     NODE_ENV: z
@@ -19,6 +20,7 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
+    UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY,
     NEXT_PUBLIC_STACK_PROJECT_ID: process.env.NEXT_PUBLIC_STACK_PROJECT_ID,
