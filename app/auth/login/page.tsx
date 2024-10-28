@@ -1,17 +1,28 @@
+"use client";
+
 import SignIn from "@/components/sign-in-form";
 import Link from "next/link";
-import { Metadata } from "next";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icons } from "@/components/icons";
+import { Quote } from "@/config";
 import { cn } from "@/lib/utils";
-
-
-export const metadata: Metadata = {
-    title: "Login"
-}
+import { useStackApp, useUser } from "@stackframe/stack";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { APP_NAME } from "@/config";
 
 export default async function Login() {
+
+    const user = useUser()
+    const router = useRouter()
+    const app = useStackApp()
+    
+    useEffect(()=>{
+        if (user) {
+            router.push(app.urls.afterSignIn)
+        }
+    },[user])
 
     return (
         <div className="relative flex h-screen w-screen">
@@ -34,7 +45,6 @@ export default async function Login() {
                     <SignIn/>
                 </div>
             </div>
-            {/* Right side */}
             <div
                 className="relative hidden w-1/2 flex-col-reverse rounded-medium p-10 shadow-small lg:flex rounded-l-xl"
                 style={{
@@ -47,19 +57,16 @@ export default async function Login() {
                 <div className="flex flex-col items-end gap-4">
                     <div className="flex flex-row-reverse items-center gap-x-3">
                         <Avatar>
-                            <AvatarImage src="https://github.com/shadcn.png" />
-                            <AvatarFallback>AR</AvatarFallback>
+                            <AvatarImage src={Quote.author.avatarURL} />
+                            <AvatarFallback>{Quote.author.name.slice(0,2)}</AvatarFallback>
                         </Avatar>
                         <div className="text-right">
-                            <h1 className="w-full text-sm text-white">Arafet BenKilani</h1>
-                            <p className="text-muted-foreground text-xs">Founder of Power Gym</p>
+                            <h1 className="w-full text-sm text-white">{Quote.author.name}</h1>
+                            <p className="text-muted-foreground text-xs">Founder of ${APP_NAME}</p>
                         </div>
                     </div>
                     <p className="w-full text-right text-2xl text-black/60">
-                        <q className="text-white font-normal italic text-pretty">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget augue nec massa
-                            volutpat aliquet.
-                        </q>
+                        <q className="text-white font-normal italic text-pretty">{Quote.q}</q>
                     </p>
                 </div>
             </div>

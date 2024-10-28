@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import OAuthButton from '@/components/oauth-button';
-import { useStackApp } from "@stackframe/stack";
+import { useStackApp, useUser } from "@stackframe/stack";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserAuthSchema } from "@/lib/zod";
@@ -21,6 +21,7 @@ import {
 
 import type { SignInFormData } from "@/types";
 
+
 export default function SignIn() {
 
     const app = useStackApp()
@@ -37,6 +38,7 @@ export default function SignIn() {
         if (status==="error") {
             return toast.error("Uh oh! Something went wrong.")
         }
+        toast.success("Magic link sent! Check your email to log in.")
     }
 
     return (

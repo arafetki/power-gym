@@ -1,29 +1,32 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from 'next-themes';
-import {Rubik, Rubik_Mono_One} from "next/font/google";
+import {Poppins, Roboto_Mono} from "next/font/google";
+import { APP_NAME } from "@/config";
 import { Toaster } from "@/components/ui/sonner";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackServerApp } from "@/lib/auth";
 
 import "./globals.css";
 
-const rubikSans = Rubik({
+const poppinsSans = Poppins({
   display: 'swap',
   subsets: ["latin"],
-  variable: "--font-rubik-sans",
-  weight: ['300', '400', '500','600','700','800','900'],
+  style: ["normal","italic"] ,
+  variable: "--font-poppins-sans",
+  weight: ['100','200','300', '400', '500','600','700','800','900'],
 });
-const rubikMono = Rubik_Mono_One({
+const robotoMono = Roboto_Mono({
   display: 'swap',
   subsets: ["latin"],
-  variable: "--font-rubik-mono",
-  weight: "400",
+  style: ["normal","italic"],
+  variable: "--font-roboto-mono",
+  weight: ['100','200','300', '400', '500','600','700'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Power Gym",
-    template: `%s | Power Gym`,
+    default: APP_NAME,
+    template: `%s | ${APP_NAME}`,
   },
   
 };
@@ -43,11 +46,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${rubikSans.variable} ${rubikMono.variable} font-rubikSans antialiased`}
+        className={`${poppinsSans.variable} ${robotoMono.variable} font-poppinsSans antialiased`}
       >
         <ThemeProvider
-          enableSystem
-          defaultTheme="system"
+          defaultTheme="dark"
           attribute="class"
           disableTransitionOnChange
         >

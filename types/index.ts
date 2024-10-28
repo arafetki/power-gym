@@ -1,7 +1,5 @@
 import {z} from "zod";
 import { UserAuthSchema } from "@/lib/zod";
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { users } from "@/server/db/schema";
 
 export type SignInFormData = z.infer<typeof UserAuthSchema>;
 

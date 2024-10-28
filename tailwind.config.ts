@@ -71,8 +71,8 @@ const config: Config = {
 			"shine": "shine 8s ease-in-out infinite",
 		},
 		fontFamily: {
-			rubikSans: 'var(--font-rubik-sans)',
-			rubikMono: 'var(--font-rubik-mono)',
+			poppinsSans: 'var(--font-poppins-sans)',
+			robotoMono: 'var(--font-roboto-mono)',
 		}
   	}
   },

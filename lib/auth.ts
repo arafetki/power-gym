@@ -9,7 +9,9 @@ export const stackServerApp = new StackServerApp({
     signIn: "/auth/login",
     afterSignIn: "/dashboard",
     signUp: "/auth/register",
+    afterSignUp: "/auth/onboarding",
     afterSignOut: "/",
-    handler: `${process.env.NEXT_PUBLIC_SITE_URL}/auth`
+    accountSettings: "/account",
+    handler: `${process.env.NEXT_PUBLIC_SITE_URL}/auth`,
   }
 });
