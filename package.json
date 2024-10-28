@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "drizzle-kit generate && drizzle-kit migrate && next build",
+    "build": "pnpm db:generate && pnpm db:push && next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
