@@ -1,7 +1,9 @@
 import {z} from "zod";
-import { UserAuthSchema } from "@/lib/zod";
+import { UserAuthSchema, UserOnboardingSchema } from "@/lib/zod";
 
 export type SignInFormData = z.infer<typeof UserAuthSchema>;
+
+export type OnboardingFormData = z.infer<typeof UserOnboardingSchema>;
 
 type APIErrorResponse = {
     error : {

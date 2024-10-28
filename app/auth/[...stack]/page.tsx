@@ -1,6 +1,6 @@
 
 import { StackHandler } from '@stackframe/stack';
-import { stackServerApp } from "@/lib/auth";
+import { stackServerApp } from "@/lib/stack-auth/app";
 
 type HandlerProps = {
     params?: {

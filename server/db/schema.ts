@@ -1,23 +1,20 @@
-import { nanoid } from "@/lib/nanoid";
 import {
   pgTable,
   text,
   varchar,
   timestamp,
-  pgEnum,
   uniqueIndex,
   uuid,
-  char,
-  smallint,
+  json
 } from "drizzle-orm/pg-core";
-
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey(),
-  displayName: varchar("display_name", { length: 256 }).notNull(),
-  email: varchar("email", { length: 256 }).notNull().unique(),
+  displayName: varchar("display_name", { length: 256 }),
+  email: varchar("email", { length: 256 }).unique(),
   avatarURL: text("avatar_url"),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  metadata : json("meta_data"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }),
 }, (table) => {
   return {

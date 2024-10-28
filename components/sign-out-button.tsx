@@ -10,10 +10,10 @@ export default function SignOutButton({...props}: ButtonProps) {
 
     return (
         <Button 
-            onClick={async () => await signOut()} 
-            variant="expandIcon" 
-            Icon={Icons.signOut} 
-            iconPlacement="right" 
+            onClick={async () => await signOut()}
+            variant="expandIcon"
+            Icon={Icons.signOut}
+            iconPlacement="right"
             {...props}
         >
             Sign Out

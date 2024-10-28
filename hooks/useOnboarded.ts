@@ -10,7 +10,7 @@ export function useOnboarded() {
     const router = useRouter();
 
     useEffect(() => {
-        if (!user.clientMetadata?.onboarded) {
+        if (!user.clientReadOnlyMetadata?.onboarded) {
             router.push('/auth/onboarding');
         }
     }, [user]);

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import OAuthButton from '@/components/oauth-button';
-import { useStackApp, useUser } from "@stackframe/stack";
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useStackApp } from "@stackframe/stack";
+import { useForm,SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserAuthSchema } from "@/lib/zod";
 import { Separator } from "@/components/ui/separator";
@@ -44,11 +44,11 @@ export default function SignIn() {
     return (
         <Form {...form}>
             <div className='w-full flex justify-center gap-2'>
-                <OAuthButton 
+                <OAuthButton
                     provider='google'
                     className='grow'
                 />
-                <OAuthButton 
+                <OAuthButton
                     provider='microsoft'
                     className='grow'
                 />

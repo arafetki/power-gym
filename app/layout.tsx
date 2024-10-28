@@ -4,7 +4,7 @@ import {Poppins, Roboto_Mono} from "next/font/google";
 import { APP_NAME } from "@/config";
 import { Toaster } from "@/components/ui/sonner";
 import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackServerApp } from "@/lib/auth";
+import { stackServerApp } from "@/lib/stack-auth/app";
 
 import "./globals.css";
 

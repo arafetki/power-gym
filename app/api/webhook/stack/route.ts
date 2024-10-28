@@ -15,8 +15,7 @@ export async function POST(req: NextRequest) {
         "svix-signature": req.headers.get("svix-signature") || ""
     }
 
-    const buffer = await req.arrayBuffer()
-    const body = Buffer.from(buffer); 
+    const body = await req.text()
 
     let payload;
 
@@ -31,6 +30,7 @@ export async function POST(req: NextRequest) {
                     displayName: parsedPayload.data.display_name,
                     email: parsedPayload.data.primary_email,
                     avatarURL: parsedPayload.data.profile_image_url,
+                    metadata: parsedPayload.data.client_metadata,
                     createdAt: new Date(parsedPayload.data.signed_up_at_millis)
                 }
                 await db.insert(users).values(newUser).onConflictDoNothing({target: users.email})
@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
                     displayName: parsedPayload.data.display_name,
                     email: parsedPayload.data.primary_email,
                     avatarURL: parsedPayload.data.profile_image_url,
+                    metadata: parsedPayload.data.client_metadata,
                 }
                 await db.update(users).set({
                     ...updatedUser,
